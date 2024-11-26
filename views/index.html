@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Signup Form</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1> Rawan's Web Page</h1>
+    <div class="wrapper">
+      <div class="contact">
+        <h2>Signup</h2>
+        <form id="emailForm" method="POST" action="/send">
+          <p>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </p>
+          <p>
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </p>
+          <p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </p>
+         <p>
+        <button type="submit">Sign Up</button>
+         </p>
+      </form>
+    </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        password: formData.get('password')
+      };
+
+      fetch('/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result.success) {
+          alert('Email sent successfully!');
+          document.getElementById('emailForm').reset();
+        } else {
+          alert('Failed to send email.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while sending the email.');
+      });
+    });
+  </script>
+</body>
+</html>
