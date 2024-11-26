@@ -43,7 +43,7 @@ app.post('/send', (req, res) => {
     port: 587,  // Port for TLS
     secure: false,  // false means using TLS
     auth: {
-      user: 'rawanalbinzayed@outlook.com',  // Your Outlook email
+      user: '',  // Your Outlook email
       pass: '',  // Your password or App password
     },
     tls: {
@@ -54,7 +54,7 @@ app.post('/send', (req, res) => {
 
   // Email options
   let mailOptions = {
-    from: 'rawanalbinzayed@outlook.com',  // Sender's email
+    from: '',  // Sender's email
     to: email,  // Sends email to the user who signed up
     subject: 'This is to test the lab',
     html: output,
